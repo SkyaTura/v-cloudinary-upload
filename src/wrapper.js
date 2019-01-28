@@ -3,12 +3,10 @@ import component from './v-cloudinary-upload.vue'
 export function install(Vue) {
   if (install.installed) return
   install.installed = true
-  Vue.component('VCloudinaryUpload', component)
+  Vue.component('v-cloudinary-upload', component)
 }
 
-const plugin = {
-  install,
-}
+const plugin = { install }
 
 let GlobalVue = null
 if (typeof window !== 'undefined') {
