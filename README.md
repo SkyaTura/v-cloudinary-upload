@@ -51,23 +51,24 @@ export default {
 }
 </script>
 ```
-
-## Contributing
-```
-npm install
-```
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-### Compiles and minifies for production
-```
-npm run build
-```
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Properties
+| Property | Required | Type | Description |
+|--|--|--|--|
+| accountName | **true** | String | Your Cloudinary's account name
+| autoUpload | *false* | Boolean | If the component should automatically perform an upload after selecting a file
+| capture | *false* | Boolean, String | Passed to the input element. Check [this documentation](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#attr-capture) for more details
+| disabled | *false* | Boolean | If true, the file picker won't be triggered
+| fileTypes | *false* | Array, String | A list of allowed image types. It can be either an array or comma separated. **Default:** *
+| preset | *false* | String | Used when uploading unsigned pictures. It will be automatically appended to the upload request
+| tag | *false* | String | Defines the component wrapper tag. **Default:** div
+| uploadParams | *false* | Object | Append extra parameters to the upload request
+| @picked | -- | Event | Fired when user chooses a file. It contains: file, name and url (Seeabove for more information)
+| @uploaded | -- | Event | Fired after a successful. It contains the response from Cloudinary
+### Slot scope
+| Property | Type | Description |
+| -- | -- | -- |
+| file | Object | Contains the file that will be uploaded
+| name | String | The name of the file selected, if available
+| url | String | The file encoded in base64 for using in previews
+| loading | Boolean | True if the component is currently uploading an image
+| uploaded | Object | The response from Cloudinary, if available. (Same as the passed to the uploaded event)
