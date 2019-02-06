@@ -32,6 +32,7 @@ export default {
     loading: false,
     name: '',
     url: '',
+    fileReader: null,
     uploaded: null,
   }),
   computed: {
@@ -58,10 +59,12 @@ export default {
         fr.addEventListener('load', () => {
           this.url = fr.result
           this.file = files[0]
+          this.fileReader = fr
           this.$emit('picked', {
             file: this.file,
             name: this.name,
             url: this.url,
+            fileReader: fr,
           })
           if (this.autoUpload) this.$nextTick(() => this.upload())
         })
@@ -70,7 +73,13 @@ export default {
       this.name = ''
       this.file = ''
       this.url = ''
+      this.fileReader = null
       this.uploaded = null
+      this.$emit('picked', {
+        file: this.file,
+        name: this.name,
+        url: this.url,
+      })
     },
     upload(params = {}) {
       const { file, preset: upload_preset } = this
@@ -82,7 +91,7 @@ export default {
       Object.entries(payload).forEach(([key, value]) =>
         formData.append(key, value)
       )
-      fetch(
+      return fetch(
         `https://api.cloudinary.com/v1_1/${this.accountName}/image/upload`,
         {
           method: 'POST',
@@ -93,9 +102,9 @@ export default {
         .then(body => {
           this.uploaded = body
           this.$emit('uploaded', body)
+          this.loading = false
+          return body
         })
-        .catch(error => console.error(error))
-        .then(() => (this.loading = false))
     },
   },
 }

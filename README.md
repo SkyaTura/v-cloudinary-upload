@@ -68,6 +68,7 @@ export default {
 | Property | Type | Description |
 | -- | -- | -- |
 | file | Object | Contains the file that will be uploaded
+| fileReader | Object | Contains the result from the file reader
 | name | String | The name of the file selected, if available
 | url | String | The file encoded in base64 for using in previews
 | loading | Boolean | True if the component is currently uploading an image

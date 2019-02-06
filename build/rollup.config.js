@@ -4,7 +4,7 @@ export default {
   input: 'src/wrapper.js', // Path relative to package.json
   output: {
     name: 'VCloudinaryUpload',
-    // exports: 'named',
+    exports: 'named',
   },
   plugins: [
     vue({
